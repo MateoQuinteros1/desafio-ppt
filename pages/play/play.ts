@@ -1,5 +1,6 @@
 import { goTo } from "../../src/router";
 import { state } from "../../src/state";
+import { isGithubPages } from "../../src/router";
 
 class PlayPage extends HTMLElement {
   shadowDom = this.attachShadow({ mode: "open" });
@@ -89,6 +90,16 @@ class PlayPage extends HTMLElement {
     const getRockImg: any = this.shadowDom.querySelector(".rock");
     const getScissorsImg: any = this.shadowDom.querySelector(".scissors");
     //Escuchadores de eventos para que al hacer click en una opción, las otras desaparezcan
+    const gitHubDomain = isGithubPages();
+    if (gitHubDomain) {
+      getPaperImg.setAttribute("src", "/desafio-ppt/public/mano-papel.png");
+      getRockImg.setAttribute("src", "/desafio-ppt/public/mano-piedra.png");
+      getScissorsImg.setAttribute(
+        "src",
+        "/desafio-ppt/public/mano-tijeras.png"
+      );
+    }
+
     getPaperImg?.addEventListener("click", () => {
       getRockImg.style.display = "none";
       getScissorsImg.style.display = "none";
@@ -106,7 +117,9 @@ class PlayPage extends HTMLElement {
     });
 
     function goToMovePage() {
-      goTo("/move");
+      // Cambiar la ruta dependiendo del dominio
+      const movePagePath = gitHubDomain ? "/desafio-ppt/move" : "/move";
+      goTo(movePagePath);
     }
 
     setTimeout(() => {

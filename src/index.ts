@@ -17,8 +17,8 @@ import { initRouter } from "./router";
   state.subscribe(() => {
     state.updateLocalStorage();
   });
-  /* 
-  const moves: Array<MoveObj> = [];
+
+  /*   const moves: Array<MoveObj> = [];
   const points = {
     user: 0,
     computer: 0,

@@ -7,7 +7,7 @@ type RouterPath = {
 // Definición de rutas, con tres rutas de ejemplo.
 const routes: RouterPath[] = [
   {
-    pathRegex: /\/welcome/,
+    pathRegex: /\/$/,
     pageElName: "welcome-page",
   },
   {
@@ -36,11 +36,13 @@ export function goTo(path: string) {
 }
 
 function renderPath(path: string): void {
-  const route = routes.find((route) => route.pathRegex.test(path));
+  // Limpiar el base path si está presente
+  const cleanPath = path.replace(/^\/desafio-ppt/, "") || "/"; // Asegúrate de que no quede vacío
+
+  const route = routes.find((route) => route.pathRegex.test(cleanPath));
 
   if (route) {
     // Limpiar el contenido actual y montar el nuevo elemento.
-    //const app = document.getElementById("app");
     const root = document.body;
     if (root) {
       root.innerHTML = ""; // Limpiar contenido previo
@@ -48,13 +50,14 @@ function renderPath(path: string): void {
       root.appendChild(newPageEl);
     }
   } else {
-    console.warn(`El path '${path}' no fue encontrado.`);
+    console.warn(`El path '${cleanPath}' no fue encontrado.`);
   }
 }
 
 // Inicializa el router, montando la ruta inicial y escuchando cambios en la URL.
 export function initRouter(): void {
-  const initialPath = window.location.pathname;
+  const initialPath = getCleanPathFromURL();
+  console.log(initialPath);
 
   // Llama a renderPath con la ruta inicial.
   renderPath(initialPath);
@@ -62,4 +65,18 @@ export function initRouter(): void {
   window.addEventListener("popstate", function () {
     renderPath(window.location.pathname);
   });
+}
+
+export function getCleanPathFromURL(): string {
+  const fullPath = window.location.pathname;
+  const basePath = "/desafio-ppt";
+
+  if (fullPath.startsWith(basePath)) {
+    return fullPath.replace(basePath, "") || "/";
+  }
+  return fullPath;
+}
+
+export function isGithubPages() {
+  return location.host.includes("github.io");
 }

@@ -1,5 +1,6 @@
 import { state } from "../../src/state";
 import { goTo } from "../../src/router";
+import { isGithubPages } from "../../src/router";
 class Move extends HTMLElement {
   usermove: string = "";
   computermove: string = "";
@@ -73,22 +74,31 @@ class Move extends HTMLElement {
     const getMovesContainer = this.shadowDom.querySelector(".page");
     const newUserMoveEl = document.createElement("img");
     const newComputerMoveEl = document.createElement("img");
-    //Personalización de la imagen que representa el movimiento del usuario
-    newUserMoveEl.src = `/public/mano-${this.usermove}.png`;
+
+    // Cambiar las URLs de las imágenes
+    const gitHubDomain = isGithubPages();
+    const prefix = gitHubDomain ? "/desafio-ppt" : "";
+
+    // Personalización de la imagen que representa el movimiento del usuario
+    newUserMoveEl.src = `${prefix}/public/mano-${this.usermove}.png`;
     newUserMoveEl.classList.add(`${this.usermove}`);
     newUserMoveEl.classList.add("usermove");
     newUserMoveEl.classList.add("imagen-aparecer");
-    //Personalización de la imagen que representa el movimiento de la computadora
-    newComputerMoveEl.src = `/public/mano-${this.computermove}.png`;
+
+    // Personalización de la imagen que representa el movimiento de la computadora
+    newComputerMoveEl.src = `${prefix}/public/mano-${this.computermove}.png`;
     newComputerMoveEl.classList.add(`${this.computermove}`);
     newComputerMoveEl.classList.add("computermove");
     newComputerMoveEl.classList.add("imagen-aparecer");
-    //Agregando ambos movimientos a la pagina
+
+    // Agregando ambos movimientos a la página
     getMovesContainer?.appendChild(newComputerMoveEl);
     getMovesContainer?.appendChild(newUserMoveEl);
 
     function goToResultPage() {
-      goTo("/result");
+      // Cambiar la ruta dependiendo del dominio
+      const resultPagePath = gitHubDomain ? "/desafio-ppt/result" : "/result";
+      goTo(resultPagePath);
     }
 
     setTimeout(() => {

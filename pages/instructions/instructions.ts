@@ -1,3 +1,4 @@
+import { isGithubPages } from "../../src/router";
 class Instructions extends HTMLElement {
   shadowDom = this.attachShadow({ mode: "open" });
   constructor() {
@@ -123,6 +124,18 @@ class Instructions extends HTMLElement {
       </div>
     </div>
     `;
+    const getButtonEl: any = this.shadowDom.querySelector("main-button");
+    const images = this.shadowDom.querySelectorAll("img");
+
+    const gitHubDomain = isGithubPages();
+    if (gitHubDomain) {
+      getButtonEl.setAttribute("goto", "/desafio-ppt/play");
+      images.forEach((img) => {
+        // Cambia la URL de cada imagen agregando el prefijo
+        const originalSrc = img.getAttribute("src");
+        img.setAttribute("src", `/desafio-ppt${originalSrc}`);
+      });
+    }
   }
 }
 customElements.define("instructions-page", Instructions);

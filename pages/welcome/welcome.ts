@@ -1,3 +1,4 @@
+import { isGithubPages } from "../../src/router";
 class WelcomePage extends HTMLElement {
   shadowDom = this.attachShadow({ mode: "open" });
   constructor() {
@@ -126,6 +127,19 @@ class WelcomePage extends HTMLElement {
       }
     </style>
     `;
+
+    const getButtonEl: any = this.shadowDom.querySelector("main-button");
+    const images = this.shadowDom.querySelectorAll("img");
+
+    const gitHubDomain = isGithubPages();
+    if (gitHubDomain) {
+      getButtonEl.setAttribute("goto", "/desafio-ppt/instructions");
+      images.forEach((img) => {
+        // Cambia la URL de cada imagen agregando el prefijo
+        const originalSrc = img.getAttribute("src");
+        img.setAttribute("src", `/desafio-ppt${originalSrc}`);
+      });
+    }
   }
 }
 customElements.define("welcome-page", WelcomePage);
