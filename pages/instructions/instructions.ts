@@ -132,8 +132,11 @@ class Instructions extends HTMLElement {
       getButtonEl.setAttribute("goto", "/desafio-ppt/play");
       images.forEach((img) => {
         // Cambia la URL de cada imagen agregando el prefijo
-        const originalSrc = img.getAttribute("src");
-        img.setAttribute("src", `/desafio-ppt${originalSrc}`);
+        const originalSrc: any = img.getAttribute("src");
+        img.setAttribute(
+          "src",
+          `/desafio-ppt${originalSrc.replace("/public", "")}`
+        );
       });
     }
   }

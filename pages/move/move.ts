@@ -80,13 +80,13 @@ class Move extends HTMLElement {
     const prefix = gitHubDomain ? "/desafio-ppt" : "";
 
     // Personalización de la imagen que representa el movimiento del usuario
-    newUserMoveEl.src = `${prefix}/public/mano-${this.usermove}.png`;
+    newUserMoveEl.src = `${prefix}/mano-${this.usermove}.png`;
     newUserMoveEl.classList.add(`${this.usermove}`);
     newUserMoveEl.classList.add("usermove");
     newUserMoveEl.classList.add("imagen-aparecer");
 
     // Personalización de la imagen que representa el movimiento de la computadora
-    newComputerMoveEl.src = `${prefix}/public/mano-${this.computermove}.png`;
+    newComputerMoveEl.src = `${prefix}/mano-${this.computermove}.png`;
     newComputerMoveEl.classList.add(`${this.computermove}`);
     newComputerMoveEl.classList.add("computermove");
     newComputerMoveEl.classList.add("imagen-aparecer");

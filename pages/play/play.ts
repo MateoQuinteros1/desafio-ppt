@@ -91,14 +91,14 @@ class PlayPage extends HTMLElement {
     const getScissorsImg: any = this.shadowDom.querySelector(".scissors");
     //Escuchadores de eventos para que al hacer click en una opción, las otras desaparezcan
     const gitHubDomain = isGithubPages();
-    if (gitHubDomain) {
+    /*     if (gitHubDomain) {
       getPaperImg.setAttribute("src", "/desafio-ppt/public/mano-papel.png");
       getRockImg.setAttribute("src", "/desafio-ppt/public/mano-piedra.png");
       getScissorsImg.setAttribute(
         "src",
         "/desafio-ppt/public/mano-tijeras.png"
       );
-    }
+    } */
 
     getPaperImg?.addEventListener("click", () => {
       getRockImg.style.display = "none";
