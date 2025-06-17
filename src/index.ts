@@ -13,7 +13,9 @@ import { state } from "./state";
 import { initRouter } from "./router";
 (function () {
   initRouter();
+  console.log(state.data);
   state.loadDataToState();
+  console.log(state.data);
   state.subscribe(() => {
     state.updateLocalStorage();
   });

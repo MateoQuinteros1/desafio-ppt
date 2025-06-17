@@ -1,5 +1,4 @@
 import { state } from "../../src/state";
-import { isGithubPages } from "../../src/router";
 class Result extends HTMLElement {
   winner: string | undefined = "";
   userscore: number = 0;
@@ -115,11 +114,9 @@ class Result extends HTMLElement {
   </style>`;
     const getPage = this.shadowDom.querySelector(".page");
     const getStarContainer = this.shadowDom.querySelector(".star-container");
-    // Cambiar el atributo 'goto' del botón dependiendo del dominio
-    const gitHubDomain = isGithubPages();
-    const buttonPath = gitHubDomain ? "/desafio-ppt/" : "/";
+
     const mainButton: any = this.shadowDom.querySelector("main-button");
-    mainButton.setAttribute("goto", buttonPath);
+    mainButton.setAttribute("goto", "/");
 
     /*Dependiendo el valor de this.winner, que es el resultado de la jugada,
     cambia la estrella y el color de fondo*/

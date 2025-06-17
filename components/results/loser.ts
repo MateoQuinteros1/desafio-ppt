@@ -8,7 +8,7 @@ class Loser extends HTMLElement {
   render() {
     this.shadowDom.innerHTML = `
           <div class="container">
-        <img class="green" src="/public/estrella-roja.svg" alt="" />
+        <img class="green" src="/estrella-roja.svg" alt="" />
         <h1>Perdiste</h1>
       </div>
       <style>

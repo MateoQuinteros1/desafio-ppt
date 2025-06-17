@@ -36,10 +36,8 @@ export function goTo(path: string) {
 }
 
 function renderPath(path: string): void {
-  // Limpiar el base path si está presente
-  const cleanPath = path.replace(/^\/desafio-ppt/, "") || "/"; // Asegúrate de que no quede vacío
-
-  const route = routes.find((route) => route.pathRegex.test(cleanPath));
+  console.log("Path renderizado");
+  const route = routes.find((route) => route.pathRegex.test(path));
 
   if (route) {
     // Limpiar el contenido actual y montar el nuevo elemento.
@@ -50,13 +48,13 @@ function renderPath(path: string): void {
       root.appendChild(newPageEl);
     }
   } else {
-    console.warn(`El path '${cleanPath}' no fue encontrado.`);
+    console.warn(`El path '${path}' no fue encontrado.`);
   }
 }
 
 // Inicializa el router, montando la ruta inicial y escuchando cambios en la URL.
 export function initRouter(): void {
-  const initialPath = getCleanPathFromURL();
+  const initialPath = window.location.pathname;
   console.log(initialPath);
 
   // Llama a renderPath con la ruta inicial.
@@ -65,18 +63,4 @@ export function initRouter(): void {
   window.addEventListener("popstate", function () {
     renderPath(window.location.pathname);
   });
-}
-
-export function getCleanPathFromURL(): string {
-  const fullPath = window.location.pathname;
-  const basePath = "/desafio-ppt";
-
-  if (fullPath.startsWith(basePath)) {
-    return fullPath.replace(basePath, "") || "/";
-  }
-  return fullPath;
-}
-
-export function isGithubPages() {
-  return location.host.includes("github.io");
 }

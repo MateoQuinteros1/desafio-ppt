@@ -19,7 +19,7 @@ class Counter extends HTMLElement {
         color: black;
         font-size: 90px;
         font-weight: 700;
-        font-family: "American Typewriter";
+        font-family: "Roboto";
         border: 18px solid black;
       }
       @media (min-width: 760px) {

@@ -1,4 +1,3 @@
-import { isGithubPages } from "../../src/router";
 class Instructions extends HTMLElement {
   shadowDom = this.attachShadow({ mode: "open" });
   constructor() {
@@ -15,8 +14,7 @@ class Instructions extends HTMLElement {
       display: flex;
       justify-content: center;
       align-items: end;
-      background-size: 120px 120px;
-      background-image: url("https://s3-alpha-sig.figma.com/img/d2fc/d311/9aea6ee5d39e70e777bd8fec3a82c58e?Expires=1743379200&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=UZMrBd75u-8PoVYAvCDHlwfnt9A5ZUHrXps5qi6p6t9d6i~3F96INEl4n18LksVwwPZvtRvbdQoyHZ47Mb3zQTFMQUK-bJVZ2wfTlV77KEAXUMcD5fXJIck0u~2nthAxupYO0ydcpZBEpG1XesutwrGPnYZ9LqJ9DnIC9Yzm0fyWX3bO1ajlfQWjEIvBlEhsBTyU2xGf2CSHDUSE8M5JSc8Q1p2S34gaokaXJO28orQEYngyq5fvmYLAKlz62R1jCdch3tQRSkVDDTBRCEFF~IsoWQu6WnyKpyGVNtbkcTAaKP-Qai96fGH2QpWcWznJfz5C-lPjISJsw9kHUqdzhQ__");
+      background-image: url("/ppt-fondo.svg");
     }
     @media (min-width: 760px) {
       .page {
@@ -35,9 +33,9 @@ class Instructions extends HTMLElement {
       }
     }
     .instructions-title {
-      font-family: "American Typewriter";
+      font-family: "Roboto";
       font-weight: bold;
-      font-size: 40px;
+      font-size:36px;
       text-align: center;
       margin-bottom: 50px;
     }
@@ -45,7 +43,7 @@ class Instructions extends HTMLElement {
       .instructions-title {
         padding: 0 35px;
         margin-bottom: 60px;
-        font-size: 48px;
+        font-size: 45px;
       }
     }
     .hands-container {
@@ -117,28 +115,13 @@ class Instructions extends HTMLElement {
         </h1>
         <main-button goto="/play">¡Jugar!</main-button>
         <div class="hands-container">
-          <img class="scissors" src="/public/mano-tijeras.png" alt="scissors" />
-          <img class="rock" src="/public/mano-piedra.png" alt="rock" />
-          <img class="paper" src="/public/mano-papel.png" alt="paper" />
+          <img class="scissors" src="/mano-tijeras.png" alt="scissors" />
+          <img class="rock" src="/mano-piedra.png" alt="rock" />
+          <img class="paper" src="/mano-papel.png" alt="paper" />
         </div>
       </div>
     </div>
     `;
-    const getButtonEl: any = this.shadowDom.querySelector("main-button");
-    const images = this.shadowDom.querySelectorAll("img");
-
-    const gitHubDomain = isGithubPages();
-    if (gitHubDomain) {
-      getButtonEl.setAttribute("goto", "/desafio-ppt/play");
-      images.forEach((img) => {
-        // Cambia la URL de cada imagen agregando el prefijo
-        const originalSrc: any = img.getAttribute("src");
-        img.setAttribute(
-          "src",
-          `/desafio-ppt${originalSrc.replace("/public", "")}`
-        );
-      });
-    }
   }
 }
 customElements.define("instructions-page", Instructions);

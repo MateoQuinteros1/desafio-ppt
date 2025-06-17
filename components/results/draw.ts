@@ -8,7 +8,7 @@ class Draw extends HTMLElement {
   render() {
     this.shadowDom.innerHTML = `
     <div class="container">
-  <img class="yellow" src="/public/estrella-amarilla.svg" alt="" />
+  <img class="yellow" src="/estrella-amarilla.svg" alt="" />
   <h1>Empate</h1>
 </div>
 <style>

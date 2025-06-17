@@ -1,6 +1,5 @@
 import { goTo } from "../../src/router";
 import { state } from "../../src/state";
-import { isGithubPages } from "../../src/router";
 
 class PlayPage extends HTMLElement {
   shadowDom = this.attachShadow({ mode: "open" });
@@ -16,9 +15,9 @@ class PlayPage extends HTMLElement {
         <counter-comp></counter-comp>
       </div>
       <div class="hands-container">
-        <img class="paper" src="/public/mano-papel.png" />
-        <img class="rock" src="/public/mano-piedra.png" />
-        <img class="scissors" src="/public/mano-tijeras.png" />
+        <img class="paper" src="/mano-papel.png" />
+        <img class="rock" src="/mano-piedra.png" />
+        <img class="scissors" src="/mano-tijeras.png" />
       </div>
     </div>
     <style>
@@ -29,8 +28,7 @@ class PlayPage extends HTMLElement {
         justify-content: center;
         flex-direction: column;
         align-items: center;
-        background-size: 120px 120px;
-        background-image: url("https://s3-alpha-sig.figma.com/img/d2fc/d311/9aea6ee5d39e70e777bd8fec3a82c58e?Expires=1743379200&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=UZMrBd75u-8PoVYAvCDHlwfnt9A5ZUHrXps5qi6p6t9d6i~3F96INEl4n18LksVwwPZvtRvbdQoyHZ47Mb3zQTFMQUK-bJVZ2wfTlV77KEAXUMcD5fXJIck0u~2nthAxupYO0ydcpZBEpG1XesutwrGPnYZ9LqJ9DnIC9Yzm0fyWX3bO1ajlfQWjEIvBlEhsBTyU2xGf2CSHDUSE8M5JSc8Q1p2S34gaokaXJO28orQEYngyq5fvmYLAKlz62R1jCdch3tQRSkVDDTBRCEFF~IsoWQu6WnyKpyGVNtbkcTAaKP-Qai96fGH2QpWcWznJfz5C-lPjISJsw9kHUqdzhQ__");
+        background-image: url("/ppt-fondo.svg");
       }
 
       .hands-container {
@@ -90,7 +88,6 @@ class PlayPage extends HTMLElement {
     const getRockImg: any = this.shadowDom.querySelector(".rock");
     const getScissorsImg: any = this.shadowDom.querySelector(".scissors");
     //Escuchadores de eventos para que al hacer click en una opción, las otras desaparezcan
-    const gitHubDomain = isGithubPages();
     /*     if (gitHubDomain) {
       getPaperImg.setAttribute("src", "/desafio-ppt/public/mano-papel.png");
       getRockImg.setAttribute("src", "/desafio-ppt/public/mano-piedra.png");
@@ -116,14 +113,8 @@ class PlayPage extends HTMLElement {
       state.setMove("tijeras");
     });
 
-    function goToMovePage() {
-      // Cambiar la ruta dependiendo del dominio
-      const movePagePath = gitHubDomain ? "/desafio-ppt/move" : "/move";
-      goTo(movePagePath);
-    }
-
     setTimeout(() => {
-      goToMovePage();
+      goTo("/move");
     }, 7000);
   }
 }

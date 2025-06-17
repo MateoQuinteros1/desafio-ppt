@@ -8,7 +8,7 @@ class Winner extends HTMLElement {
   render() {
     this.shadowDom.innerHTML = `
         <div class="container">
-      <img class="green" src="/public/estrella-verde.svg" alt="" />
+      <img class="green" src="/estrella-verde.svg" alt="" />
       <h1>Ganaste</h1>
     </div>
     <style>

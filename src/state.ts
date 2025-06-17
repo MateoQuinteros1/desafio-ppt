@@ -18,14 +18,30 @@ export const state = {
   loadDataToState() {
     const getMovesList = localStorage.getItem("moves");
     const getPoints = localStorage.getItem("points");
-    const parseMovesList = JSON.parse(getMovesList as string);
-    const parsePoints = JSON.parse(getPoints as string);
-    this.setState({
-      moves: parseMovesList,
-      points: parsePoints,
-    });
-    for (const cb of this.listeners) {
-      cb();
+    if (!getMovesList && !getPoints) {
+      localStorage.setItem("moves", JSON.stringify([]));
+      localStorage.setItem("points", JSON.stringify({ user: 0, computer: 0 }));
+      const getLsMovesList = JSON.parse(
+        localStorage.getItem("moves") as string
+      );
+      const getUserPoints = JSON.parse(
+        localStorage.getItem("points") as string
+      );
+      this.data.moves = getLsMovesList;
+      this.data.points = getUserPoints;
+      for (const cb of this.listeners) {
+        cb();
+      }
+    } else {
+      const parseMovesList = JSON.parse(getMovesList as string);
+      const parsePoints = JSON.parse(getPoints as string);
+      this.setState({
+        moves: parseMovesList,
+        points: parsePoints,
+      });
+      for (const cb of this.listeners) {
+        cb();
+      }
     }
   },
   updateLocalStorage() {
